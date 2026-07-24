@@ -1,0 +1,56 @@
+/* 
+ * Popup Common Styles 
+ * 라이브 및 테스트 환경 공용
+ */
+
+/* 배경 딤 레이어 */
+.popup-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(16, 22, 31, 0.46);
+  pointer-events: auto;
+}
+
+/* 팝업 전체 감싸기 */
+.site-popup-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+.site-popup-wrap.is-hidden,
+.site-popup-item.is-hidden {
+  display: none !important;
+}
+
+.site-popup-item.is-entering {
+  animation: popupItemFadeIn 0.18s ease both;
+}
+
+.site-popup-item.is-leaving {
+  animation: popupItemFadeOut 0.18s ease both;
+}
+
+/* 팝업 공용 링크 영역 스타일 (멀티 링크용) */
+.site-popup-link-area {
+  position: absolute;
+  display: block;
+  padding: 0;
+  z-index: 1;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+@keyframes popupItemFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popupItemFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

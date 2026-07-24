@@ -1,0 +1,101 @@
+.bds-stab {
+  margin-bottom: 40px;
+}
+
+.bds-stab ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bds-stab-depth2 {
+  margin-top: 10px;
+}
+
+.bds-stab li {
+  width: auto;
+  height: 40px;
+  flex: 1;
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+  transition: all .3s ease-in-out;
+  background-color: #e9eaec;
+}
+
+.bds-stab li.active {
+  display: block;
+  background-color: #0d695b;
+  color: #fff;
+}
+
+.bds-stab li a,
+.bds-stab li button {
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: inherit;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.bds-stab li.active a,
+.bds-stab li.active button {
+  color: #fff;
+}
+
+.bds-stab li a.on,
+.bds-stab li button.on {
+  color: #fff;
+  font-weight: 700;
+  background-color: var(--m_color);
+}
+
+.bds-stab li.stab_100 {
+  width: 100%;
+  flex: unset;
+}
+
+.bds-stab li.stab_50 {
+  width: 50%;
+  flex: unset;
+}
+
+.bds-stab li.stab_33 {
+  width: calc(33.33% - (20px / 3));
+  flex: unset;
+}
+
+.bds-stab li.special-stab ul li {
+  width: 33.3%;
+}
+
+.stab_content>.hide,
+.stab_content_group>.hide {
+  display: none !important;
+}
+
+@media (max-width: 1280px) {
+
+  .bds-stab li a,
+  .bds-stab li button {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+
+# Vite/local build cache
+node_modules/.vite/
+
+# Local environment files
+.env
+.env.*
