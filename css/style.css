@@ -164,25 +164,46 @@ iframe {
 
 .btn_contact_wrap {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .btn_contact {
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 8px;
+    min-width: 142px;
+    height: 46px;
+    padding: 0 18px;
+    border-radius: 999px;
     font-size: 16px;
-    color: #01695A;
+    font-weight: 700;
+    color: #fff;
+    background-color: #20b56f;
+    box-shadow: 0 10px 22px rgba(32, 181, 111, 0.24);
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.btn_contact:hover {
+    background-color: #27c87d;
+    transform: translateY(-2px);
 }
 
 .btn_contact>div {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #01695A;
-    border-radius: calc(1px / 0);
+    background-color: rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+}
+
+.btn_visit_reserve {
+    flex-basis: min(100%, 296px);
+    margin-top: 2px;
 }
 
 .icon_naver img {
@@ -261,12 +282,25 @@ table.event_result_table tbody tr td {
         height: 60px;
     }
 
-    .s_menu ul>li a {
-        font-size: 15px;
+    .s_menu ul {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        scrollbar-width: none;
     }
 
-    .s_menu ul>li:not(.active) {
+    .s_menu ul::-webkit-scrollbar {
         display: none;
+    }
+
+    .s_menu ul>li {
+        flex-shrink: 0;
+    }
+
+    .s_menu ul>li a {
+        font-size: 15px;
+        padding: 0 15px;
     }
 }
 

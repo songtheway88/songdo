@@ -714,6 +714,51 @@ footer ul span {
     color: #fff;
     text-decoration: none;
     transition: transform 0.2s;
+    position: relative;
+}
+
+.floating_btn::before {
+    content: attr(aria-label);
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translate(8px, -50%);
+    min-width: 78px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.82);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.floating_btn::after {
+    content: "";
+    position: absolute;
+    right: calc(100% + 6px);
+    top: 50%;
+    transform: translate(8px, -50%);
+    border: 6px solid transparent;
+    border-left-color: rgba(0, 0, 0, 0.82);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.floating_btn:hover::before,
+.floating_btn:focus-visible::before,
+.floating_btn:active::before,
+.floating_btn:hover::after,
+.floating_btn:focus-visible::after,
+.floating_btn:active::after {
+    opacity: 1;
+    transform: translate(0, -50%);
 }
 .floating_btn:active {
     transform: scale(0.9);

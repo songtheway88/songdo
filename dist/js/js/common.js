@@ -85,8 +85,8 @@ $(document).ready(function () {
 
     // 모바일 토글 메뉴 (하나 열리면 나머지 닫힘)
     $(document)
-        .off('click', '.full_menu_wrap > ul > li > a')
-        .on('click', '.full_menu_wrap > ul > li > a', function (e) {
+        .off('click', '.full_menu_wrap .depth1 > li > a')
+        .on('click', '.full_menu_wrap .depth1 > li > a', function (e) {
 
             var $li = $(this).parent();
             var $sub = $li.children('.depth2');
@@ -95,6 +95,7 @@ $(document).ready(function () {
             if (!$sub.length) return;
 
             e.preventDefault();
+            e.stopPropagation();
 
             // 현재 li 외의 다른 메뉴들 닫기
             $li
