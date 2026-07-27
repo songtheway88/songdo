@@ -73,4 +73,17 @@ $(function () {
 
     // 초기 로드시 체크
     handleScrollMode();
+
+    // 네이버TV 임베드 (클릭 시 재생)
+    $('.video_embed .video_play_btn').on('click', function () {
+        var $embed = $(this).closest('.video_embed');
+        var videoId = $embed.data('video-id');
+        var $iframe = $('<iframe>', {
+            src: 'https://tv.naver.com/embed/' + videoId + '?autoPlay=true',
+            allow: 'autoplay; fullscreen',
+            allowfullscreen: true,
+            frameborder: 0
+        });
+        $embed.empty().append($iframe);
+    });
 });
