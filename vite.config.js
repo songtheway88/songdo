@@ -43,6 +43,43 @@ const preserveFaviconPath = () => ({
   }
 });
 
+const createSitesEntrypoint = () => ({
+  name: 'create-sites-entrypoint',
+  closeBundle() {
+    const outDir = resolve(__dirname, 'dist');
+    const serverDir = resolve(outDir, 'server');
+    const openaiDir = resolve(outDir, '.openai');
+    const hostingSrc = resolve(__dirname, '.openai/hosting.json');
+    const hostingDest = resolve(openaiDir, 'hosting.json');
+    const serverDest = resolve(serverDir, 'index.js');
+
+    fs.mkdirSync(serverDir, { recursive: true });
+    fs.mkdirSync(openaiDir, { recursive: true });
+
+    if (fs.existsSync(hostingSrc)) {
+      fs.copyFileSync(hostingSrc, hostingDest);
+    }
+
+    fs.writeFileSync(serverDest, `export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const response = await env.ASSETS.fetch(request);
+
+    if (response.status !== 404) {
+      return response;
+    }
+
+    if (!url.pathname.includes('.')) {
+      return env.ASSETS.fetch(new Request(new URL('/index.html', url), request));
+    }
+
+    return response;
+  }
+};
+`);
+  }
+});
+
 export default defineConfig({
   root: './',
   build: {
@@ -69,7 +106,8 @@ export default defineConfig({
         }
       ]
     }),
-    preserveFaviconPath()
+    preserveFaviconPath(),
+    createSitesEntrypoint()
   ],
   server: {
     port: 3000,
