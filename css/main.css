@@ -1104,29 +1104,31 @@ header {
     overflow: hidden;
   }
 
-  /* normal-scroll 클래스가 있는 섹션의 모바일 대응 */
-  .section.normal-scroll {
+  /* 모든 섹션 및 fullpage 래퍼의 고정높이 해제 (모바일 겹침/잘림 원천 방지) */
+  .section,
+  .section .fp-tableCell,
+  .section .fp-scrollable,
+  .section .fp-scroller {
+    display: block !important;
     height: auto !important;
     min-height: 100vh !important;
   }
 
-  .section.normal-scroll .fp-tableCell {
-    height: auto !important;
+  .section .fp-scrollable {
+    overflow: visible !important;
+  }
+
+  #section2 .fp-tableCell {
     padding-bottom: 50px;
   }
 
-  /* section2 전용 모바일 스타일 */
-  #section2.normal-scroll {
-    overflow-y: auto;
-  }
-
-  #section2 ul li {
-    flex-direction: column;
+  #section2 .fp-tableCell ul li {
+    flex-direction: column !important;
     align-items: flex-start;
   }
 
   #section2 .fp-tableCell ul:last-child li {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse !important;
     align-items: flex-start;
   }
 
@@ -1172,7 +1174,8 @@ header {
   }
 
   #section2 ul li img {
-    width: 100%;
+    width: 100% !important;
+    height: auto !important;
   }
 
   #section1 .fp-tableCell {

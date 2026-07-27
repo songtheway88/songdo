@@ -790,6 +790,9 @@ footer ul span {
 
 @media (max-width: 800px) {
     /* 모바일에서는 하단바 높이만큼 띄워줌 */
+    body {
+        padding-bottom: 75px !important;
+    }
     .mobile_floating_wrap {
         bottom: 85px; 
     }

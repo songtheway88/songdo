@@ -10,18 +10,16 @@ $(function () {
     // 풀페이지 스크롤 제어 함수
     function handleScrollMode() {
         var isMobile = checkResponsive();
-        var currentSection = $('.section').eq(idx);
-        var hasNormalScrollClass = currentSection.hasClass('normal-scroll'); // 특정 클래스명
 
-        if (isMobile && hasNormalScrollClass) {
+        if (isMobile) {
             if (!isNormalScrollSection) {
                 $.fn.fullpage.setAutoScrolling(false);
                 $.fn.fullpage.setFitToSection(false);
-                // 해당 섹션에 스크롤바 표시
-                currentSection.css({
+                // 모바일에서는 모든 섹션의 fullpage 스크롤 강제를 끄고 자연스러운 일반 스크롤로 해제
+                $('.section').css({
                     'height': 'auto',
                     'min-height': '100vh',
-                    'overflow-y': 'auto'
+                    'overflow-y': 'visible'
                 });
                 isNormalScrollSection = true;
             }
@@ -30,7 +28,7 @@ $(function () {
                 $.fn.fullpage.setAutoScrolling(true);
                 $.fn.fullpage.setFitToSection(true);
                 // 스타일 초기화
-                $('.section.normal-scroll').css({
+                $('.section').css({
                     'height': '',
                     'min-height': '',
                     'overflow-y': ''

@@ -85,6 +85,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    target: ['chrome60', 'firefox60', 'safari11', 'edge18'],
+    cssTarget: ['chrome60', 'firefox60', 'safari11', 'edge18'],
     rollupOptions: {
       input: getHtmlEntries(),
     },
