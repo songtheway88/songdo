@@ -105,6 +105,10 @@ export default defineConfig({
         {
           src: 'include/**/*',
           dest: '.'
+        },
+        {
+          src: 'img/og_image.jpg',
+          dest: '.'
         }
       ]
     }),
