@@ -96,15 +96,15 @@ export default defineConfig({
       targets: [
         {
           src: 'js/**/*',
-          dest: 'js'
+          dest: '.'
         },
         {
           src: 'bds_admin/**/*',
-          dest: 'bds_admin'
+          dest: '.'
         },
         {
           src: 'include/**/*',
-          dest: 'include'
+          dest: '.'
         }
       ]
     }),
