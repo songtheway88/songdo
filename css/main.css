@@ -629,67 +629,20 @@
   width: 100%;
   height: 100dvh;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 100px 70px 0;
-}
-
-#section2 ul {
-  display: flex;
   flex-direction: column;
-  gap: 50px;
-}
-
-#section2 ul li {
-  line-height: 1.4;
-  display: flex;
-  align-items: flex-end;
-  gap: 16px;
-}
-
-#section2 .fp-tableCell ul:first-child li:nth-child(2) {
-  margin-left: 30px;
-}
-
-#section2 .fp-tableCell ul:first-child li:nth-child(3) {
-  margin-left: 60px;
-}
-
-#section2 .fp-tableCell ul:last-child li:nth-child(2) {
-  margin-right: 30px;
-}
-
-#section2 .fp-tableCell ul:last-child li:nth-child(3) {
-  margin-right: 80px;
-}
-
-#section2 .fp-tableCell ul:last-child p,
-#section2 .fp-tableCell ul:last-child h6 {
-  text-align: right;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  padding: 190px 70px 60px;
 }
 
 #section2 .middle {
   font-weight: bold;
-  position: relative;
-  width: 370px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-#section2 .middle::after {
-  width: 560px;
-  height: 560px;
-  content: "";
-  border: 1px solid #000;
-  opacity: 0.1;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: calc(1px / 0);
-  pointer-events: none;
+  text-align: center;
 }
 
 #section2 .middle p {
@@ -697,7 +650,7 @@
   color: #000;
   opacity: 0.3;
   letter-spacing: 8px;
-  transform: translate(-30px, 20px);
+  margin-bottom: 8px;
 }
 
 #section2 .middle em {
@@ -710,6 +663,30 @@
   font-size: 90px;
   font-weight: bold;
   color: #0d695b;
+}
+
+#section2 .premium_grid {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+
+#section2 ul {
+  flex: 1;
+  min-width: 0;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+#section2 ul li {
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
 }
 
 /*  공통 li 텍스트 스타일링 */
@@ -890,11 +867,6 @@ header {
   }
 }
 
-/* SEC2 */
-#section2 .fp-tableCell ul:last-child li {
-  justify-content: flex-end;
-}
-
 /* contact */
 .map_wrap {
   width: unset;
@@ -932,28 +904,12 @@ header {
 /* MOB */
 @media (max-width: 1620px) {
   #section2 .fp-tableCell {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "title title"
-      "con con2";
-    padding: 40px 20px 30px;
+    padding: 170px 20px 30px;
+    gap: 30px;
   }
 
-  #section2 .middle {
-    grid-area: title;
-    width: 100%;
-  }
-
-  #section2 .fp-tableCell ul:first-child {
-    grid-area: con;
-  }
-
-  #section2 .fp-tableCell ul:last-child {
-    grid-area: con2;
+  #section2 .premium_grid {
+    gap: 40px;
   }
 
   #section2 ul {
@@ -980,20 +936,6 @@ header {
   #section1 .left p:nth-child(3) {
     margin-top: 20px;
     font-size: 16px;
-  }
-
-  #section2 .fp-tableCell ul:first-child li {
-    margin-left: unset !important;
-  }
-
-  #section2 .fp-tableCell ul:last-child li {
-    flex-direction: row-reverse;
-    margin-right: unset !important;
-  }
-
-  #section2 .fp-tableCell ul:last-child p,
-  #section2 .fp-tableCell ul:last-child h6 {
-    text-align: left;
   }
 
   #section1 .fp-tableCell {
@@ -1083,16 +1025,6 @@ header {
 }
 
 @media (max-width: 1110px) {
-  #section2 .fp-tableCell {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 1fr 1fr;
-    grid-template-areas:
-      "title title"
-      "con con2"
-      "con con2";
-    overflow: hidden;
-  }
-
   /* 모든 섹션 및 fullpage 래퍼의 고정높이 해제 (모바일 겹침/잘림 원천 방지) */
   .section,
   .section .fp-tableCell,
@@ -1111,13 +1043,17 @@ header {
     padding-bottom: 50px;
   }
 
-  #section2 .fp-tableCell ul li {
-    flex-direction: column !important;
-    align-items: flex-start;
+  #section2 .premium_grid {
+    flex-direction: column;
+    gap: 30px;
   }
 
-  #section2 .fp-tableCell ul:last-child li {
-    flex-direction: column-reverse !important;
+  #section2 ul {
+    max-width: 100%;
+  }
+
+  #section2 .fp-tableCell ul li {
+    flex-direction: column !important;
     align-items: flex-start;
   }
 
@@ -1150,16 +1086,6 @@ header {
 
   #section0 .txt_hide {
     width: min(86vw, 420px);
-  }
-
-  #section2 .fp-tableCell {
-    grid-template-columns: 1fr;
-    grid-template-rows: 200px auto auto;
-    grid-template-areas:
-      "title"
-      "con"
-      "con2";
-    gap: 30px;
   }
 
   #section2 ul li img {
