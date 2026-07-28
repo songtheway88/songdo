@@ -74,16 +74,24 @@ $(function () {
     // 초기 로드시 체크
     handleScrollMode();
 
-    // 히어로 섹션을 벗어나면 우측 플로팅 버튼 노출
+    // 히어로 / 전자책 입력폼 / CONTACT 구간에서는 우측 플로팅 버튼 숨김 (입력 방해 방지)
     var $floatingWrap = $('.mobile_floating_wrap');
-    var heroEl = document.getElementById('section0');
-    if (heroEl && $floatingWrap.length && 'IntersectionObserver' in window) {
-        var heroObserver = new IntersectionObserver(function (entries) {
+    var floatingHideZoneIds = ['section0', 'section_ebook', 'section3'];
+    var floatingHideZoneEls = floatingHideZoneIds
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+    if (floatingHideZoneEls.length && $floatingWrap.length && 'IntersectionObserver' in window) {
+        var intersectingHideZones = {};
+        var floatingObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
-                $floatingWrap.toggleClass('show_floating', !entry.isIntersecting);
+                intersectingHideZones[entry.target.id] = entry.isIntersecting;
             });
+            var anyHideZoneVisible = Object.keys(intersectingHideZones).some(function (id) {
+                return intersectingHideZones[id];
+            });
+            $floatingWrap.toggleClass('show_floating', !anyHideZoneVisible);
         }, { threshold: 0.15 });
-        heroObserver.observe(heroEl);
+        floatingHideZoneEls.forEach(function (el) { floatingObserver.observe(el); });
     }
 
     // 플로팅 무료전자책 버튼 - 전자책 섹션으로 스크롤
