@@ -1404,10 +1404,16 @@ header {
 
   #section0 .fp-tableCell {
     padding-top: 120px;
+    gap: 72px;
   }
 
   #section0 .txt_hide {
     font-size: 26px;
+  }
+
+  /* 모바일은 .fp-tableCell이 block로 강제되어 flex gap이 무시되므로 margin으로 간격 확보 */
+  .hero_faq {
+    margin-top: 72px;
   }
 
   .contact_inner_wrap {
