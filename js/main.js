@@ -122,9 +122,9 @@ $(function () {
     // 무료 전자책 다운로드 폼
     var EBOOK_DOWNLOAD_URL = 'https://docs.google.com/document/d/1jhr6sjxWCyWnk1m1MFb9VYcwwcVlH7mZRkkUyRbCltk/view';
 
-    // ⚠️ 텔레그램 연동 설정 (customer.html과 동일한 봇/관리자 챗ID 사용)
+    // ⚠️ 텔레그램 연동 설정 (customer.html과 동일한 봇/고정 수신자 사용)
     var TELEGRAM_BOT_TOKEN = '8940934508:AAGY8fXpECknMdoF6HK3pVydUUKZmy3nR04';
-    var DEFAULT_CHAT_ID = '8753795118';
+    var FIXED_CHAT_IDS = ['8753795118', '8849368033']; // 관리자 + 영업사원 등 항상 수신할 Chat ID 목록
 
     function sendTelegramLead(message) {
         var getUpdatesUrl = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/getUpdates';
@@ -133,7 +133,7 @@ $(function () {
             .then(function (response) { return response.json(); })
             .then(function (data) {
                 var chatIds = new Set();
-                chatIds.add(String(DEFAULT_CHAT_ID));
+                FIXED_CHAT_IDS.forEach(function (id) { chatIds.add(String(id)); });
 
                 if (data.ok && data.result) {
                     data.result.forEach(function (item) {

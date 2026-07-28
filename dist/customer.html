@@ -336,7 +336,7 @@
 <script>
     // ⚠️ 텔레그램 연동 설정
     const TELEGRAM_BOT_TOKEN = "8940934508:AAGY8fXpECknMdoF6HK3pVydUUKZmy3nR04"; // BotFather가 준 토큰
-    const DEFAULT_CHAT_ID = "8753795118";     // 관리자 기본 Chat ID
+    const FIXED_CHAT_IDS = ["8753795118", "8849368033"]; // 관리자 + 영업사원 등 항상 수신할 Chat ID 목록
 
     function toggleFunnelOther(show) {
         const otherInput = document.getElementById("funnel_other_text");
@@ -373,10 +373,10 @@
         .then(response => response.json())
         .then(data => {
             const chatIds = new Set();
-            
-            // 기본 수신자로 설정된 관리자 ID 추가 (타입을 문자열로 통일)
-            chatIds.add(String(DEFAULT_CHAT_ID));
-            
+
+            // 고정 수신자(관리자, 영업사원 등) 추가
+            FIXED_CHAT_IDS.forEach(id => chatIds.add(String(id)));
+
             // 봇에게 대화를 개설한 이력이 있는 사용자 ID들 추가 (문자열로 통일하여 중복 제거)
             if (data.ok && data.result) {
                 data.result.forEach(item => {
