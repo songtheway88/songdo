@@ -8,9 +8,17 @@
   background-position: center top;
   background-size: auto 108%;
   position: relative;
+}
+
+#section0 .fp-tableCell {
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  padding-top: clamp(190px, 22vh, 260px);
+  gap: 30px;
 }
 
 /* section0 */
@@ -27,24 +35,22 @@
 }
 
 #section0 .txt_hide {
-  width: min(31.25vw, 600px);
-  height: auto;
-  aspect-ratio: 1200 / 864;
-  background: url("../img/main_txt.png") no-repeat center/contain;
-  position: absolute;
-  top: clamp(190px, 22vh, 260px);
-  margin-top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  width: auto;
+  max-width: min(90vw, 720px);
+  margin: 0 auto;
+  font-size: 34px;
+  line-height: 1.45;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  text-indent: 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* 히어로 사진 위 질문 카드 - 메인 문구(.txt_hide) 바로 아래 위치 */
+/* 히어로 사진 위 질문 카드 - #section0의 flex column 흐름상 메인 문구 바로 아래 위치 */
 .hero_faq {
-  position: absolute;
-  left: 50%;
-  top: calc(clamp(190px, 22vh, 260px) + min(31.25vw, 600px) * 0.72 + 40px);
-  transform: translateX(-50%);
   width: min(90vw, 420px);
+  margin: 0 auto;
   background-color: rgba(10, 16, 28, 0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -127,20 +133,9 @@
   background-color: #9ac41c;
 }
 
-@media (max-width: 1110px) {
-  .hero_faq {
-    top: calc(120px + min(31.25vw, 600px) * 0.72 + 30px);
-  }
-}
-
 @media (max-width: 730px) {
   .hero_faq {
-    left: 16px;
-    right: 16px;
-    top: calc(120px + min(86vw, 420px) * 0.72 + 20px);
-    transform: none;
-    width: auto;
-    max-width: none;
+    width: calc(100% - 32px);
     padding: 16px 16px 10px;
   }
 
@@ -1088,14 +1083,14 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
 /* ANIMATION */
 #section0 .txt_hide {
   opacity: 0%;
-  transform: translate(-50%, 20px);
+  transform: translateY(20px);
   animation: sec0_title 1s forwards 0.6s;
 }
 
 @keyframes sec0_title {
   to {
     opacity: 100%;
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
 }
 
@@ -1407,9 +1402,12 @@ header {
     align-items: flex-start;
   }
 
+  #section0 .fp-tableCell {
+    padding-top: 120px;
+  }
+
   #section0 .txt_hide {
-    top: 120px;
-    margin-top: 0;
+    font-size: 26px;
   }
 
   .contact_inner_wrap {
@@ -1435,7 +1433,8 @@ header {
   }
 
   #section0 .txt_hide {
-    width: min(86vw, 420px);
+    max-width: 86vw;
+    font-size: 22px;
   }
 
   #section2 ul li img {
