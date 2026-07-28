@@ -38,6 +38,97 @@
   transform: translateX(-50%);
 }
 
+/* 히어로 사진 위 질문 카드 */
+.hero_faq {
+  position: absolute;
+  left: 50%;
+  bottom: 90px;
+  transform: translateX(-50%);
+  width: min(90vw, 420px);
+  background-color: rgba(10, 16, 28, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px 20px 12px;
+  color: #fff;
+  z-index: 3;
+}
+
+.hero_faq_title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.hero_faq_title svg {
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.hero_faq_sub {
+  font-size: 13px;
+  color: #c7cdd8;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+.hero_faq_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero_faq_list li a {
+  display: block;
+  padding: 12px 14px;
+  border-left: 3px solid #c6a26b;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 0 8px 8px 0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.hero_faq_list li a::before {
+  content: "▸ ";
+  color: #c6a26b;
+}
+
+.hero_faq_list li a:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 730px) {
+  .hero_faq {
+    left: 16px;
+    right: 100px;
+    bottom: 90px;
+    transform: none;
+    width: auto;
+    max-width: none;
+    padding: 16px 16px 10px;
+  }
+
+  .hero_faq_title {
+    font-size: 15px;
+  }
+
+  .hero_faq_list li a {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero_faq {
+    bottom: 80px;
+  }
+}
+
 /* #section_schedule */
 #section_schedule {
   position: relative;
