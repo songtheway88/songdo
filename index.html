@@ -161,7 +161,7 @@
     ]
 }</script>
 </head>
-<body>
+<body class="has-hero-floating">
 <header>
 <div>
 <div class="header_left_wrap">
@@ -289,7 +289,7 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 <div id="fullpage">
 <!-- 🔹 Section 0 -->
-<section class="section active" id="section0">
+<section class="section active" data-anchor="section0" id="section0">
 <div class="txt_hide">
 <p>
                 송도국제도시 <br/>
@@ -309,10 +309,14 @@
 <li><a href="tel:1688-5535">내 자금으로 가능한가요?</a></li>
 <li><a href="tel:1688-5535">송도의 다른 공구 대비 얼마나 싼 거죠?</a></li>
 </ul>
+<div class="hero_faq_actions">
+<a class="hero_faq_btn hero_faq_btn_call" href="tel:1688-5535">📞 전화하기</a>
+<a class="hero_faq_btn hero_faq_btn_reserve" href="customer.html">📝 방문예약</a>
+</div>
 </div>
 </section>
 <!-- 🔹 Section Video -->
-<section class="section normal-scroll" id="section_video">
+<section class="section normal-scroll" data-anchor="section_video" id="section_video">
 <div class="video_wrap">
 <div class="video_embed" data-video-id="103054041">
 <img alt="송도 한내들 센트럴리버 영상 썸네일" class="video_thumb" src="img/썸네일.jpg"/>
@@ -428,7 +432,7 @@
         </div>
     </section> -->
 <!-- 🔹 Section 2 -->
-<section class="section normal-scroll" id="section2">
+<section class="section normal-scroll" data-anchor="section2" id="section2">
 <div class="middle">
 <p>송도 한내들 센트럴리버</p>
 <em class="nanum">PREMIUM <span>6</span> </em>
@@ -508,7 +512,7 @@
 </div>
 </section>
 <!-- 🔹 Section E-book -->
-<section class="section normal-scroll" id="section_ebook">
+<section class="section normal-scroll" data-anchor="section_ebook" id="section_ebook">
 <div class="ebook_wrap">
 <span class="ebook_badge">무료 전자책</span>
 <div class="ebook_cover">
@@ -552,7 +556,7 @@
 </form>
 </div>
 </section>
-<section class="section" id="section3">
+<section class="section" data-anchor="section3" id="section3">
 <div class="contact_wrap">
 <div class="contact_title_wrap">
 <p class="contact_title nanum">CONTACT</p>
@@ -652,9 +656,9 @@
 <a aria-label="분양상담" class="floating_btn btn_phone" href="tel:1688-5535">
 <svg class="lucide lucide-phone" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
 </a>
-<!-- 카톡문의 -->
-<a aria-label="카톡상담" class="floating_btn btn_kakao" href="https://open.kakao.com/o/sKlQCaFi" target="_blank">
-<svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.188.702-.68 2.531-.777 2.946-.12.518.2.513.424.364.177-.12 2.812-1.909 3.934-2.67.377.054.763.086 1.149.086 4.97 0 9-3.186 9-7.115C21 6.185 16.97 3 12 3z"></path></svg>
+<!-- 무료전자책 -->
+<a aria-label="무료전자책" class="floating_btn btn_ebook" href="#section_ebook">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
 </a>
 <!-- 방문예약 -->
 <a aria-label="방문예약" class="floating_btn btn_reserve" href="customer.html">

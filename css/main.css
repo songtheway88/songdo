@@ -38,11 +38,11 @@
   transform: translateX(-50%);
 }
 
-/* 히어로 사진 위 질문 카드 */
+/* 히어로 사진 위 질문 카드 - 메인 문구(.txt_hide) 바로 아래 위치 */
 .hero_faq {
   position: absolute;
   left: 50%;
-  bottom: 90px;
+  top: calc(clamp(190px, 22vh, 260px) + min(31.25vw, 600px) * 0.72 + 40px);
   transform: translateX(-50%);
   width: min(90vw, 420px);
   background-color: rgba(10, 16, 28, 0.6);
@@ -102,11 +102,42 @@
   background-color: rgba(255, 255, 255, 0.12);
 }
 
+.hero_faq_actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  padding-bottom: 8px;
+}
+
+.hero_faq_btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero_faq_btn_call {
+  background-color: #5c8cf2;
+}
+
+.hero_faq_btn_reserve {
+  background-color: #9ac41c;
+}
+
+@media (max-width: 1110px) {
+  .hero_faq {
+    top: calc(120px + min(31.25vw, 600px) * 0.72 + 30px);
+  }
+}
+
 @media (max-width: 730px) {
   .hero_faq {
     left: 16px;
     right: 100px;
-    bottom: 90px;
+    top: calc(120px + min(86vw, 420px) * 0.72 + 20px);
     transform: none;
     width: auto;
     max-width: none;
@@ -121,12 +152,25 @@
     padding: 10px 12px;
     font-size: 13px;
   }
+
+  .hero_faq_btn {
+    padding: 10px;
+    font-size: 13px;
+  }
 }
 
-@media (max-width: 400px) {
-  .hero_faq {
-    bottom: 80px;
-  }
+/* 히어로 섹션을 벗어나기 전까지 우측 플로팅 버튼 숨김 (index.html 전용) */
+body.has-hero-floating .mobile_floating_wrap {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+body.has-hero-floating .mobile_floating_wrap.show_floating {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* #section_schedule */

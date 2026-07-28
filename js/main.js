@@ -74,6 +74,30 @@ $(function () {
     // 초기 로드시 체크
     handleScrollMode();
 
+    // 히어로 섹션을 벗어나면 우측 플로팅 버튼 노출
+    var $floatingWrap = $('.mobile_floating_wrap');
+    var heroEl = document.getElementById('section0');
+    if (heroEl && $floatingWrap.length && 'IntersectionObserver' in window) {
+        var heroObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                $floatingWrap.toggleClass('show_floating', !entry.isIntersecting);
+            });
+        }, { threshold: 0.15 });
+        heroObserver.observe(heroEl);
+    }
+
+    // 플로팅 무료전자책 버튼 - 전자책 섹션으로 스크롤
+    $('.btn_ebook').on('click', function (event) {
+        if ($(this).attr('href') === '#section_ebook') {
+            event.preventDefault();
+            if (isNormalScrollSection) {
+                document.getElementById('section_ebook').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                $.fn.fullpage.moveTo('section_ebook');
+            }
+        }
+    });
+
     // 네이버TV 임베드 (클릭 시 재생)
     $('.video_embed .video_play_btn').on('click', function () {
         var $embed = $(this).closest('.video_embed');

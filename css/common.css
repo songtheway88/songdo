@@ -768,10 +768,10 @@ footer ul span {
 .floating_btn.btn_phone {
     background-color: #5c8cf2;
 }
-/* Kakao - yellow */
-.floating_btn.btn_kakao {
-    background-color: #ffeb00;
-    color: #3c1e1e;
+/* E-book - gold */
+.floating_btn.btn_ebook {
+    background-color: #c6a26b;
+    color: #1a1408;
 }
 /* Reserve - green-yellow */
 .floating_btn.btn_reserve {
