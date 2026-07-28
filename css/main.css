@@ -1307,6 +1307,16 @@ header {
     overflow: visible !important;
   }
 
+  /* 네이버TV 섹션은 짧은 콘텐츠에 맞춰 여백만 차지, 풀뷰포트 강제 해제 */
+  #section_video,
+  #section_video .fp-tableCell {
+    min-height: 0 !important;
+  }
+
+  #section_video .fp-tableCell {
+    padding: 40px 20px;
+  }
+
   #section2 .fp-tableCell {
     padding-bottom: 50px;
   }
