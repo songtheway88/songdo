@@ -136,7 +136,7 @@
 @media (max-width: 730px) {
   .hero_faq {
     left: 16px;
-    right: 100px;
+    right: 16px;
     top: calc(120px + min(86vw, 420px) * 0.72 + 20px);
     transform: none;
     width: auto;
