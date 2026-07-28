@@ -86,4 +86,40 @@ $(function () {
         });
         $embed.empty().append($iframe);
     });
+
+    // 무료 전자책 다운로드 폼
+    // ⚠️ 아래 링크를 실제 구글 문서(전자책) 링크로 교체하세요.
+    var EBOOK_DOWNLOAD_URL = 'https://docs.google.com/REPLACE_WITH_EBOOK_LINK';
+
+    $('.ebook_source_btn').on('click', function () {
+        $('.ebook_source_btn').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $('#ebook_privacy_link').on('click', function () {
+        $('#ebook_privacy_box').toggleClass('show');
+    });
+
+    $('#ebook_form').on('submit', function (event) {
+        event.preventDefault();
+
+        var name = $('#ebook_name').val().trim();
+        var phone = $('#ebook_phone').val().trim();
+        var agreed = $('#ebook_agree_check').is(':checked');
+
+        if (!name) {
+            alert('이름을 입력해 주세요.');
+            return;
+        }
+        if (!phone) {
+            alert('연락처를 입력해 주세요.');
+            return;
+        }
+        if (!agreed) {
+            alert('개인정보 수집 및 이용에 동의해 주세요.');
+            return;
+        }
+
+        window.open(EBOOK_DOWNLOAD_URL, '_blank');
+    });
 });
