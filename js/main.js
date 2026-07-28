@@ -88,8 +88,7 @@ $(function () {
     });
 
     // 무료 전자책 다운로드 폼
-    // ⚠️ 아래 링크를 실제 구글 문서(전자책) 링크로 교체하세요.
-    var EBOOK_DOWNLOAD_URL = 'https://docs.google.com/REPLACE_WITH_EBOOK_LINK';
+    var EBOOK_DOWNLOAD_URL = 'https://docs.google.com/document/d/1jhr6sjxWCyWnk1m1MFb9VYcwwcVlH7mZRkkUyRbCltk/view';
 
     $('.ebook_source_btn').on('click', function () {
         $('.ebook_source_btn').removeClass('active');
