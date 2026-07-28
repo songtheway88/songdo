@@ -90,6 +90,42 @@ $(function () {
     // 무료 전자책 다운로드 폼
     var EBOOK_DOWNLOAD_URL = 'https://docs.google.com/document/d/1jhr6sjxWCyWnk1m1MFb9VYcwwcVlH7mZRkkUyRbCltk/view';
 
+    // ⚠️ 텔레그램 연동 설정 (customer.html과 동일한 봇/관리자 챗ID 사용)
+    var TELEGRAM_BOT_TOKEN = '8940934508:AAGY8fXpECknMdoF6HK3pVydUUKZmy3nR04';
+    var DEFAULT_CHAT_ID = '8753795118';
+
+    function sendTelegramLead(message) {
+        var getUpdatesUrl = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/getUpdates';
+
+        return fetch(getUpdatesUrl)
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                var chatIds = new Set();
+                chatIds.add(String(DEFAULT_CHAT_ID));
+
+                if (data.ok && data.result) {
+                    data.result.forEach(function (item) {
+                        if (item.message && item.message.chat) {
+                            chatIds.add(String(item.message.chat.id));
+                        } else if (item.my_chat_member && item.my_chat_member.chat) {
+                            chatIds.add(String(item.my_chat_member.chat.id));
+                        }
+                    });
+                }
+
+                var sendUrl = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage';
+                var sendPromises = Array.from(chatIds).map(function (chatId) {
+                    return fetch(sendUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: chatId, text: message })
+                    });
+                });
+
+                return Promise.all(sendPromises);
+            });
+    }
+
     $('.ebook_source_btn').on('click', function () {
         $('.ebook_source_btn').removeClass('active');
         $(this).addClass('active');
@@ -118,6 +154,23 @@ $(function () {
             alert('개인정보 수집 및 이용에 동의해 주세요.');
             return;
         }
+
+        var $activeSource = $('.ebook_source_btn.active');
+        var source = $activeSource.length ? $activeSource.data('value') : '미선택';
+        var sourceEtc = $('#ebook_source_etc').val().trim();
+        if (sourceEtc) {
+            source += ' (' + sourceEtc + ')';
+        }
+
+        var message = '🔔 [송도 한내들 센트럴리버] (전자책 유입)\n\n' +
+            '👤 이름: ' + name + '\n' +
+            '📞 연락처: ' + phone + '\n' +
+            '🧭 유입경로: ' + source + '\n' +
+            '⏰ 신청시간: ' + new Date().toLocaleString('ko-KR');
+
+        sendTelegramLead(message).catch(function (error) {
+            console.error('텔레그램 전송 실패:', error);
+        });
 
         window.open(EBOOK_DOWNLOAD_URL, '_blank');
     });
