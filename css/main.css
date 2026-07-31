@@ -564,7 +564,7 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
 
 /* #section_video */
 #section_video .fp-tableCell {
-  padding: 60px 20px;
+  padding: 15px 20px;
 }
 
 .video_wrap {
@@ -763,7 +763,7 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
   align-items: center;
   justify-content: flex-start;
   gap: 30px;
-  padding: 190px 70px 60px;
+  padding: 50px 70px 60px;
 }
 
 #section2 .middle {
@@ -1239,7 +1239,7 @@ header {
 /* MOB */
 @media (max-width: 1620px) {
   #section2 .fp-tableCell {
-    padding: 170px 20px 30px;
+    padding: 45px 20px 30px;
     gap: 30px;
   }
 
@@ -1381,10 +1381,11 @@ header {
   }
 
   #section_video .fp-tableCell {
-    padding: 40px 20px;
+    padding: 10px 20px;
   }
 
   #section2 .fp-tableCell {
+    padding-top: 40px;
     padding-bottom: 50px;
   }
 
@@ -1924,6 +1925,26 @@ header {
   .more_card {
     max-width: 480px;
     margin: 0 auto;
+  }
+  /* 모바일에서 square 1:1 비율을 보장하여 썸네일 글씨가 잘리지 않고 다 보이게 함 */
+  .card_img_wrap {
+    aspect-ratio: 1 / 1 !important;
+  }
+}
+
+/* PC / Mobile Display Helpers */
+.pc_only {
+  display: inline !important;
+}
+.mo_only {
+  display: none !important;
+}
+@media (max-width: 800px) {
+  .pc_only {
+    display: none !important;
+  }
+  .mo_only {
+    display: inline !important;
   }
 }
 
