@@ -28,11 +28,17 @@ $(document).ready(function () {
     }
     // 모바일 웹뷰 대응 (전화걸기 링크 차단 해제 및 즉시 전화걸기 연결)
     document.addEventListener("DOMContentLoaded", function () {
-        // 모바일 웹뷰(카카오톡, 네이버 인앱 브라우저 등)에서 전화걸기 링크 차단 우회 및 즉시 통화 연결
+        // 모바일 인앱 웹뷰(카카오톡, 네이버 앱 등)에서만 전화걸기 링크 차단 우회
         $(document).on('click', 'a[href^="tel:"]', function (e) {
-            var href = $(this).attr('href');
-            if (href) {
-                location.href = href;
+            var ua = navigator.userAgent.toLowerCase();
+            var isInApp = ua.indexOf('kakaotalk') > -1 || ua.indexOf('naver') > -1 || ua.indexOf('line') > -1;
+            
+            if (isInApp) {
+                e.preventDefault(); // 기본 이벤트 중단 (더블 실행 및 자동전화걸기 오감지 방지)
+                var href = $(this).attr('href');
+                if (href) {
+                    location.href = href;
+                }
             }
         });
     });
