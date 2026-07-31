@@ -26,15 +26,24 @@ $(document).ready(function () {
             });
         }
     }
-    // 아이폰 대응
+    // 아이폰 및 모바일 웹뷰 대응 (전화걸기 링크 차단 해제 및 즉시 전화걸기 연결)
     document.addEventListener("DOMContentLoaded", function () {
-        // iPhone Safari 감지
         const isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
-        if (!isIOS) return;
+        
+        // 아이폰일 때 대표번호 변경 (차단 우회용 1660-1109 적용 및 href도 일치시킴)
+        if (isIOS) {
+            document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+                a.href = a.href.replace(/1688-?5535/, '16601109');
+                a.innerHTML = a.innerHTML.replace(/1688-5535/, '1660&#8209;1109');
+            });
+        }
 
-        // 아이폰일 때만 하이픈 교체 (전화번호 자동 감지 방지)
-        document.querySelectorAll('a[href^="tel:"]').forEach(a => {
-            a.innerHTML = a.innerHTML.replace(/1688-5535/, '1660&#8209;1109');
+        // 모바일 웹뷰(카카오톡, 네이버 인앱 브라우저 등)에서 전화걸기 링크 차단 우회
+        $(document).on('click', 'a[href^="tel:"]', function (e) {
+            var href = $(this).attr('href');
+            if (href) {
+                location.href = href;
+            }
         });
     });
 
