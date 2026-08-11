@@ -109,6 +109,10 @@ export default defineConfig({
         {
           src: 'img/og_image.jpg',
           dest: '.'
+        },
+        {
+          src: 'img/roulette_banner.jpg',
+          dest: '.'
         }
       ]
     }),
