@@ -299,6 +299,26 @@
   transform: scale(0.97);
 }
 
+.roulette-home-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5eaf3;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 90%;
+  text-align: center;
+  margin-top: 10px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.roulette-home-btn:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.15);
+}
+
 @keyframes pulseCtaButton {
   0% {
     box-shadow: 0 4px 12px rgba(13, 105, 91, 0.3);

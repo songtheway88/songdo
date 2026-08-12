@@ -64,7 +64,8 @@
           <div class="prize-card-wrapper">
             <img src="img/roulette_banner.jpg" alt="\ubc31\ud654\uc810 \uc0c1\ud488\uad8c 3\ub9cc\uc6d0" class="prize-card-img" />
           </div>
-          <button type="button" class="roulette-cta-btn">\uad00\uc2ec\uace0\uac1d \ub4f1\ub85d\ud558\uae30</button>
+          <button type="button" class="roulette-cta-btn">\ubc29\ubb38\uc608\uc57d\ud558\uae30</button>
+          <button type="button" class="roulette-home-btn">\ud648\ud398\uc774\uc9c0 \ubcf4\ub7ec\uac00\uae30</button>
         </div>
 
       </div>
@@ -93,6 +94,7 @@
   const footerCloseBtn = overlay.querySelector('.js-roulette-close');
   const todayCloseBtn = overlay.querySelector('.js-roulette-today-close');
   const ctaBtn = overlay.querySelector('.roulette-cta-btn');
+  const homeBtn = overlay.querySelector('.roulette-home-btn');
 
   // 6. Draw Roulette Wheel on Canvas
   const ctx = canvas.getContext('2d');
@@ -243,5 +245,12 @@
     // Redirect to customer interest registration page
     window.location.href = 'customer.html';
   });
+
+  if (homeBtn) {
+    homeBtn.addEventListener('click', () => {
+      closePopup();
+      window.location.href = 'index.html';
+    });
+  }
 
 })();
