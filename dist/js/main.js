@@ -167,6 +167,35 @@ $(function () {
         $('#ebook_privacy_box').toggleClass('show');
     });
 
+    var ebookAgreeTouchHandledAt = 0;
+
+    function toggleEbookAgreement(event) {
+        if ($(event.target).closest('#ebook_privacy_link').length) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var checkbox = document.getElementById('ebook_agree_check');
+        if (!checkbox) {
+            return;
+        }
+
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+        ebookAgreeTouchHandledAt = Date.now();
+    }
+
+    $('#ebook_agree_check, .ebook_agree_label').on('touchend', toggleEbookAgreement);
+    $('#ebook_agree_check, .ebook_agree_label').on('click', function (event) {
+        if (Date.now() - ebookAgreeTouchHandledAt < 500) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
+    });
+
     $('#ebook_form').on('submit', function (event) {
         event.preventDefault();
 
