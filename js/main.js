@@ -46,7 +46,7 @@ $(function () {
         scrollBar: false,
         scrollOverflow: true,
         responsiveHeight: 600,
-        normalScrollElements: '.schedule_list_wrap',
+        normalScrollElements: '.schedule_list_wrap, #ebook_form',
 
 
         afterLoad: function (anchorLink, index) {
