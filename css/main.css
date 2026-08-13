@@ -968,11 +968,11 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
 .ebook_agree {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   font-size: 13px;
   color: #b7bfcc;
   margin-top: 6px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   position: relative;
   z-index: 10;
 }
@@ -981,12 +981,16 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
+  line-height: 1.4;
+  flex: 1 1 auto;
 }
 
 .ebook_agree input {
+  flex: 0 0 auto;
   margin-top: 0;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   accent-color: #c6a26b;
   cursor: pointer;
   position: relative;
@@ -995,12 +999,14 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
 
 .ebook_privacy_link {
   background: none;
-  border: none;
-  padding: 0;
+  border: 1px solid rgba(198, 162, 107, 0.45);
+  border-radius: 999px;
+  padding: 8px 10px;
   color: #c6a26b;
-  text-decoration: underline;
   font-size: 13px;
+  line-height: 1;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .ebook_privacy_box {
@@ -1959,4 +1965,3 @@ header {
     display: inline !important;
   }
 }
-
