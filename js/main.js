@@ -200,10 +200,21 @@ $(function () {
             '🧭 유입경로: ' + source + '\n' +
             '⏰ 신청시간: ' + new Date().toLocaleString('ko-KR');
 
-        sendTelegramLead(message).catch(function (error) {
-            console.error('텔레그램 전송 실패:', error);
-        });
+        var $submitBtn = $('.ebook_submit');
+        var originalText = $submitBtn.text();
+        $submitBtn.text('전송 중...').prop('disabled', true);
 
-        window.open(EBOOK_DOWNLOAD_URL, '_blank');
+        sendTelegramLead(message)
+            .then(function () {
+                alert('무료 전자책 신청이 완료되었습니다.\n확인을 누르시면 다운로드 페이지로 이동합니다.');
+                window.location.href = EBOOK_DOWNLOAD_URL;
+            })
+            .catch(function (error) {
+                console.error('텔레그램 전송 실패:', error);
+                alert('전송 중 오류가 발생했습니다. 다시 시도해 주세요.');
+            })
+            .finally(function () {
+                $submitBtn.text(originalText).prop('disabled', false);
+            });
     });
 });
