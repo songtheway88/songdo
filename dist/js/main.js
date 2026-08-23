@@ -128,15 +128,17 @@ $(function () {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: message })
         }).then(function(response) {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+            return response.json().then(function(data) {
+                if (!response.ok) {
+                    throw new Error(data.error || '텔레그램 전송 실패');
+                }
+                return data;
+            });
         });
     }
 
-    // 분양천국 대시보드로도 리드 전송 (고객DB 적재 + 담당자 SMS 알림).
-    // 기존 텔레그램 발송과 무관하게 별도로 동작하며, 실패해도 전자책 신청 흐름에는 영향 없음.
+    // 분양천국 대시보드로 리드 전송 (고객DB 적재 + 텔레그램/문자 알림은 대시보드가 처리).
+    // 대시보드 전송이 실패했을 때만 sendTelegramLead로 폴백해 중복 발송을 피한다.
     var EBOOK_FUNNEL_SOURCE_MAP = {
         '네이버 검색': 'naver',
         '네이버 블로그': 'naver',
@@ -148,7 +150,7 @@ $(function () {
 
     function sendDashboardLead(name, phone, source) {
         var utmSource = EBOOK_FUNNEL_SOURCE_MAP[$('.ebook_source_btn.active').data('value')] || 'etc';
-        fetch('https://bunyang-dashboard.vercel.app/api/leads/intake', {
+        return fetch('https://bunyang-dashboard.vercel.app/api/leads/intake', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -160,8 +162,10 @@ $(function () {
                 message: '전자책 신청 / 유입경로: ' + source,
                 utm_source: utmSource
             })
-        }).catch(function (err) {
-            console.error('대시보드 리드 전송 실패:', err);
+        }).then(function (response) {
+            if (!response.ok) {
+                throw new Error('대시보드 접수 실패: ' + response.status);
+            }
         });
     }
 
@@ -240,16 +244,22 @@ $(function () {
         var originalText = $submitBtn.text();
         $submitBtn.text('전송 중...').prop('disabled', true);
 
-        sendDashboardLead(name, phone, source);
-
-        sendTelegramLead(message)
+        sendDashboardLead(name, phone, source)
             .then(function () {
                 alert('무료 전자책 신청이 완료되었습니다.\n확인을 누르시면 다운로드 페이지로 이동합니다.');
                 window.location.href = EBOOK_DOWNLOAD_URL;
             })
-            .catch(function (error) {
-                console.error('텔레그램 전송 실패:', error);
-                alert('전송 중 오류가 발생했습니다. 다시 시도해 주세요.');
+            .catch(function (dashboardErr) {
+                console.error('대시보드 리드 전송 실패, 텔레그램 직접 발송으로 폴백:', dashboardErr);
+                return sendTelegramLead(message)
+                    .then(function () {
+                        alert('무료 전자책 신청이 완료되었습니다.\n확인을 누르시면 다운로드 페이지로 이동합니다.');
+                        window.location.href = EBOOK_DOWNLOAD_URL;
+                    })
+                    .catch(function (error) {
+                        console.error('텔레그램 전송 실패:', error);
+                        alert('전송 중 오류가 발생했습니다. 다시 시도해 주세요.');
+                    });
             })
             .finally(function () {
                 $submitBtn.text(originalText).prop('disabled', false);

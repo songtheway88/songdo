@@ -388,23 +388,8 @@
                         `🧭 유입경로: ${funnel}\n` +
                         `⏰ 신청시간: ${new Date().toLocaleString('ko-KR')}`;
 
-        // Vercel 서버리스 API로 전송 (토큰 노출 방지)
-        fetch('/api/submit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: message })
-        })
-        .then(responses => {
-            alert("관심고객 등록이 정상적으로 완료되었습니다!");
-            document.getElementById("telegram_lead_form").reset();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("오류가 발생했습니다. 인터넷 연결 및 설정을 확인해 주세요.");
-        });
-
-        // 분양천국 대시보드로도 리드 전송 (고객DB 적재 + 담당자 SMS 알림).
-        // 기존 텔레그램 발송과 무관하게 별도로 동작하며, 실패해도 위 신청 흐름에는 영향 없음.
+        // 분양천국 대시보드로 리드 전송 (고객DB 적재 + 텔레그램/문자 알림은 대시보드가 처리).
+        // 대시보드 전송이 실패했을 때만 자체 텔레그램 발송(/api/submit)으로 폴백해 중복 발송을 피한다.
         const funnelSourceMap = {
             "네이버검색": "naver",
             "네이버블로그": "naver",
@@ -428,8 +413,34 @@
                 message: `이메일: ${email} / 유입경로: ${funnel}`,
                 utm_source: utmSource
             })
-        }).catch(function (err) {
-            console.error("대시보드 리드 전송 실패:", err);
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("대시보드 접수 실패: " + response.status);
+            }
+            alert("관심고객 등록이 정상적으로 완료되었습니다!");
+            document.getElementById("telegram_lead_form").reset();
+        })
+        .catch(dashboardErr => {
+            console.error("대시보드 리드 전송 실패, 텔레그램 직접 발송으로 폴백:", dashboardErr);
+            // Vercel 서버리스 API로 전송 (토큰 노출 방지)
+            fetch('/api/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: message })
+            })
+            .then(async response => {
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) {
+                    throw new Error(data.error || "전송 중 오류가 발생했습니다.");
+                }
+                alert("관심고객 등록이 정상적으로 완료되었습니다!");
+                document.getElementById("telegram_lead_form").reset();
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("오류가 발생했습니다: " + (error.message || "인터넷 연결 및 설정을 확인해 주세요."));
+            });
         });
     }
 </script>
