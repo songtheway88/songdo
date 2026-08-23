@@ -122,40 +122,47 @@ $(function () {
     // 무료 전자책 다운로드 폼
     var EBOOK_DOWNLOAD_URL = 'https://docs.google.com/document/d/1jhr6sjxWCyWnk1m1MFb9VYcwwcVlH7mZRkkUyRbCltk/view';
 
-    // ⚠️ 텔레그램 연동 설정 (customer.html과 동일한 봇/고정 수신자 사용)
-    var TELEGRAM_BOT_TOKEN = '8940934508:AAGY8fXpECknMdoF6HK3pVydUUKZmy3nR04';
-    var FIXED_CHAT_IDS = ['8753795118', '8849368033']; // 관리자 + 영업사원 등 항상 수신할 Chat ID 목록
-
     function sendTelegramLead(message) {
-        var getUpdatesUrl = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/getUpdates';
+        return fetch('/api/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: message })
+        }).then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        });
+    }
 
-        return fetch(getUpdatesUrl)
-            .then(function (response) { return response.json(); })
-            .then(function (data) {
-                var chatIds = new Set();
-                FIXED_CHAT_IDS.forEach(function (id) { chatIds.add(String(id)); });
+    // 분양천국 대시보드로도 리드 전송 (고객DB 적재 + 담당자 SMS 알림).
+    // 기존 텔레그램 발송과 무관하게 별도로 동작하며, 실패해도 전자책 신청 흐름에는 영향 없음.
+    var EBOOK_FUNNEL_SOURCE_MAP = {
+        '네이버 검색': 'naver',
+        '네이버 블로그': 'naver',
+        '네이버 배너광고': 'naver',
+        '유튜브': 'youtube',
+        '인스타그램': 'instagram',
+        '페이스북': 'facebook'
+    };
 
-                if (data.ok && data.result) {
-                    data.result.forEach(function (item) {
-                        if (item.message && item.message.chat) {
-                            chatIds.add(String(item.message.chat.id));
-                        } else if (item.my_chat_member && item.my_chat_member.chat) {
-                            chatIds.add(String(item.my_chat_member.chat.id));
-                        }
-                    });
-                }
-
-                var sendUrl = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage';
-                var sendPromises = Array.from(chatIds).map(function (chatId) {
-                    return fetch(sendUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ chat_id: chatId, text: message })
-                    });
-                });
-
-                return Promise.all(sendPromises);
-            });
+    function sendDashboardLead(name, phone, source) {
+        var utmSource = EBOOK_FUNNEL_SOURCE_MAP[$('.ebook_source_btn.active').data('value')] || 'etc';
+        fetch('https://bunyang-dashboard.vercel.app/api/leads/intake', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'baf26a49282944188052d00aaca7372e'
+            },
+            body: JSON.stringify({
+                name: name,
+                phone: phone,
+                message: '전자책 신청 / 유입경로: ' + source,
+                utm_source: utmSource
+            })
+        }).catch(function (err) {
+            console.error('대시보드 리드 전송 실패:', err);
+        });
     }
 
     $('.ebook_source_btn').on('click', function () {
@@ -232,6 +239,8 @@ $(function () {
         var $submitBtn = $('.ebook_submit');
         var originalText = $submitBtn.text();
         $submitBtn.text('전송 중...').prop('disabled', true);
+
+        sendDashboardLead(name, phone, source);
 
         sendTelegramLead(message)
             .then(function () {

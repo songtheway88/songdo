@@ -351,10 +351,6 @@
 </div>
 </div>
 <script>
-    // ⚠️ 텔레그램 연동 설정
-    const TELEGRAM_BOT_TOKEN = "8940934508:AAGY8fXpECknMdoF6HK3pVydUUKZmy3nR04"; // BotFather가 준 토큰
-    const FIXED_CHAT_IDS = ["8753795118", "8849368033"]; // 관리자 + 영업사원 등 항상 수신할 Chat ID 목록
-
     function toggleFunnelOther(show) {
         const otherInput = document.getElementById("funnel_other_text");
         if (show) {
@@ -383,53 +379,20 @@
             funnel = `기타 (${otherText || "내용 미입력"})`;
         }
 
-        // 1. 봇에게 대화를 시작한(말을 걸어둔) 모든 사용자 목록을 동적으로 가져옵니다.
-        const getUpdatesUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates`;
-        
-        fetch(getUpdatesUrl)
-        .then(response => response.json())
-        .then(data => {
-            const chatIds = new Set();
+        // 메시지 포맷팅
+        const message = `🔔 [송도 센트럴 2 - 관심고객 등록]\n\n` +
+                        `👤 이름: ${name}\n` +
+                        `📞 연락처: ${phone}\n` +
+                        `✉️ 이메일: ${email}\n` +
+                        `🏠 관심타입: ${type}\n` +
+                        `🧭 유입경로: ${funnel}\n` +
+                        `⏰ 신청시간: ${new Date().toLocaleString('ko-KR')}`;
 
-            // 고정 수신자(관리자, 영업사원 등) 추가
-            FIXED_CHAT_IDS.forEach(id => chatIds.add(String(id)));
-
-            // 봇에게 대화를 개설한 이력이 있는 사용자 ID들 추가 (문자열로 통일하여 중복 제거)
-            if (data.ok && data.result) {
-                data.result.forEach(item => {
-                    if (item.message && item.message.chat) {
-                        chatIds.add(String(item.message.chat.id));
-                    } else if (item.my_chat_member && item.my_chat_member.chat) {
-                        chatIds.add(String(item.my_chat_member.chat.id));
-                    }
-                });
-            }
-
-            // 메시지 포맷팅
-            const message = `🔔 [송도 센트럴 2 - 관심고객 등록]\n\n` +
-                            `👤 이름: ${name}\n` +
-                            `📞 연락처: ${phone}\n` +
-                            `✉️ 이메일: ${email}\n` +
-                            `🏠 관심타입: ${type}\n` +
-                            `🧭 유입경로: ${funnel}\n` +
-                            `⏰ 신청시간: ${new Date().toLocaleString('ko-KR')}`;
-
-            // 추출된 모든 챗 ID로 일괄 전송 (병렬 처리)
-            const sendPromises = Array.from(chatIds).map(chatId => {
-                const sendUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-                return fetch(sendUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message
-                    })
-                });
-            });
-
-            return Promise.all(sendPromises);
+        // Vercel 서버리스 API로 전송 (토큰 노출 방지)
+        fetch('/api/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: message })
         })
         .then(responses => {
             alert("관심고객 등록이 정상적으로 완료되었습니다!");
@@ -438,6 +401,35 @@
         .catch(error => {
             console.error("Error:", error);
             alert("오류가 발생했습니다. 인터넷 연결 및 설정을 확인해 주세요.");
+        });
+
+        // 분양천국 대시보드로도 리드 전송 (고객DB 적재 + 담당자 SMS 알림).
+        // 기존 텔레그램 발송과 무관하게 별도로 동작하며, 실패해도 위 신청 흐름에는 영향 없음.
+        const funnelSourceMap = {
+            "네이버검색": "naver",
+            "네이버블로그": "naver",
+            "인스타그램": "instagram",
+            "유튜브": "youtube",
+            "페이스북": "facebook",
+            "구글검색": "google"
+        };
+        const utmSource = funnelSourceMap[selectedFunnelRadio ? selectedFunnelRadio.value : ""] || "etc";
+
+        fetch('https://bunyang-dashboard.vercel.app/api/leads/intake', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'baf26a49282944188052d00aaca7372e'
+            },
+            body: JSON.stringify({
+                name: name,
+                phone: phone,
+                pyeong_type: type,
+                message: `이메일: ${email} / 유입경로: ${funnel}`,
+                utm_source: utmSource
+            })
+        }).catch(function (err) {
+            console.error("대시보드 리드 전송 실패:", err);
         });
     }
 </script>
