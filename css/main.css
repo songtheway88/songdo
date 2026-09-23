@@ -3,7 +3,7 @@
   width: 100%;
   height: 100dvh;
   /* dvh 말고 vh 쓸시 풀페이지는 모바일에서 스크롤생김 */
-  background-image: url("../img/main_bg.png");
+  background-image: url("../img/main-bg.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: auto 108%;
@@ -30,7 +30,7 @@
 
 @media (max-width: 800px) {
   #section0 {
-    background: url("../img/main_bg.png") no-repeat center bottom/cover;
+    background: url("../img/main-bg.webp") no-repeat center bottom/cover;
   }
 }
 
@@ -171,7 +171,7 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
 /* #section_schedule */
 #section_schedule {
   position: relative;
-  /* ORIGINAL_URL: ../img/cal_bg.jpg */ background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%220%200%20400%20300%22%20style%3D%22min-height%3A100px%3B%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eeeeee%22%20stroke%3D%22%23cccccc%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Pretendard%2C%20sans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22bold%22%20fill%3D%22%23777777%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3Ecal_bg.jpg%3C/text%3E%0A%20%20%20%20%3C/svg%3E);
+  background-image: linear-gradient(135deg, rgba(13, 105, 91, 0.08), rgba(198, 162, 107, 0.12));
   background-size: auto;
   background-repeat: no-repeat;
 }
@@ -654,7 +654,7 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
   content: "";
   width: 519px;
   height: 186px;
-  /* ORIGINAL_URL: ../img/sec1_bg_01.png */ background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%220%200%20400%20300%22%20style%3D%22min-height%3A100px%3B%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eeeeee%22%20stroke%3D%22%23cccccc%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Pretendard%2C%20sans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22bold%22%20fill%3D%22%23777777%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3Esec1_bg_01.png%3C/text%3E%0A%20%20%20%20%3C/svg%3E") no-repeat center/cover;
+  background: linear-gradient(135deg, rgba(13, 105, 91, 0.18), rgba(13, 105, 91, 0));
   bottom: 80px;
   left: -13px;
   z-index: -1;
@@ -666,7 +666,7 @@ body.has-hero-floating .mobile_floating_wrap.show_floating {
   content: "";
   width: 519px;
   height: 186px;
-  /* ORIGINAL_URL: ../img/sec1_bg_02.png */ background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%220%200%20400%20300%22%20style%3D%22min-height%3A100px%3B%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eeeeee%22%20stroke%3D%22%23cccccc%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Pretendard%2C%20sans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22bold%22%20fill%3D%22%23777777%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3Esec1_bg_02.png%3C/text%3E%0A%20%20%20%20%3C/svg%3E") no-repeat center/cover;
+  background: linear-gradient(135deg, rgba(198, 162, 107, 0), rgba(198, 162, 107, 0.2));
   top: 240px;
   right: -50px;
   z-index: -1;
@@ -1377,20 +1377,21 @@ header {
   }
 }
 
-@media (max-width: 1110px) {
-  /* 모든 섹션 및 fullpage 래퍼의 고정높이 해제 (모바일 겹침/잘림 원천 방지) */
-  .section,
-  .section .fp-tableCell,
-  .section .fp-scrollable,
-  .section .fp-scroller {
-    display: block !important;
-    height: auto !important;
-    min-height: 100vh !important;
-  }
+/* 모든 섹션 및 fullpage 래퍼의 고정높이 해제 (PC & 모바일 겹침/잘림/스크롤 튐 원천 방지) */
+.section,
+.section .fp-tableCell,
+.section .fp-scrollable,
+.section .fp-scroller {
+  display: block !important;
+  height: auto !important;
+  min-height: 100vh;
+}
 
-  .section .fp-scrollable {
-    overflow: visible !important;
-  }
+.section .fp-scrollable {
+  overflow: visible !important;
+}
+
+@media (max-width: 1110px) {
 
   /* 네이버TV 섹션은 짧은 콘텐츠에 맞춰 여백만 차지, 풀뷰포트 강제 해제 */
   #section_video,
@@ -1612,10 +1613,19 @@ header {
   color: #fff;
 }
 
-.btn_download img {
+.btn_download img,
+.download_icon {
   width: 18px;
   height: 18px;
-  /* Invert icon color on hover if needed, or use CSS filter */
+}
+
+.download_icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .btn_download:hover img {

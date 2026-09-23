@@ -111,7 +111,7 @@ export default defineConfig({
           dest: '.'
         },
         {
-          src: 'img/roulette_banner.jpg',
+          src: 'img/*.webp',
           dest: '.'
         }
       ]

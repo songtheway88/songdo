@@ -5,6 +5,17 @@
     --ui-font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    height: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
 body {
     font-family: var(--ui-font);
 }
@@ -89,7 +100,7 @@ header>div:nth-child(1) img {
 header>div h1 {
     width: 430px;
     height: 50px;
-    background: url("../img/top_logo.png") no-repeat center/contain;
+    background: url("../img/top-logo.webp") no-repeat center/contain;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -140,11 +151,13 @@ header>div .right li:nth-child(2) a {
 header>div .right li:nth-child(2) a::after {
     content: "";
     display: inline-block;
-    width: 14px;
-    height: 13px;
-    /* ORIGINAL_URL: ../img/arrow.png */ background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20viewBox%3D%220%200%20400%20300%22%20style%3D%22min-height%3A100px%3B%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eeeeee%22%20stroke%3D%22%23cccccc%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-family%3D%22Pretendard%2C%20sans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22bold%22%20fill%3D%22%23777777%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3Earrow.png%3C/text%3E%0A%20%20%20%20%3C/svg%3E") no-repeat center/contain;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
     margin-left: 20px;
     opacity: 0.6;
+    transform: rotate(45deg);
 }
 
 /* ----header nav */

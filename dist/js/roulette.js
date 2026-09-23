@@ -62,7 +62,7 @@
         <div class="roulette-view roulette-result-view">
           <h3>\ud83c\udf89 \ucd95\ud558\ud569\ub2c8\ub2e4! \ub2f9\ucca8\ub418\uc5c8\uc2b5\ub2c8\ub2e4!</h3>
           <div class="prize-card-wrapper">
-            <img src="img/roulette_banner.jpg" alt="\ubc31\ud654\uc810 \uc0c1\ud488\uad8c 3\ub9cc\uc6d0" class="prize-card-img" />
+            <img src="img/roulette-banner.webp" alt="\ubc31\ud654\uc810 \uc0c1\ud488\uad8c 3\ub9cc\uc6d0" class="prize-card-img" />
           </div>
           <button type="button" class="roulette-cta-btn">\ubc29\ubb38\uc608\uc57d\ud558\uae30</button>
           <button type="button" class="roulette-home-btn">\ud648\ud398\uc774\uc9c0 \ubcf4\ub7ec\uac00\uae30</button>

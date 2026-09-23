@@ -1,78 +1,32 @@
 $(function () {
     let $header = $('header'), idx = 0;
-    let isNormalScrollSection = false;
 
-    // 반응형 체크 함수
-    function checkResponsive() {
-        return $(window).width() <= 1110;
-    }
-
-    // 풀페이지 스크롤 제어 함수
-    function handleScrollMode() {
-        var isMobile = checkResponsive();
-
-        if (isMobile) {
-            if (!isNormalScrollSection) {
-                $.fn.fullpage.setAutoScrolling(false);
-                $.fn.fullpage.setFitToSection(false);
-                // 모바일에서는 모든 섹션의 fullpage 스크롤 강제를 끄고 자연스러운 일반 스크롤로 해제
-                $('.section').css({
-                    'height': 'auto',
-                    'min-height': '100vh',
-                    'overflow-y': 'visible'
-                });
-                isNormalScrollSection = true;
-            }
-        } else {
-            if (isNormalScrollSection) {
-                $.fn.fullpage.setAutoScrolling(true);
-                $.fn.fullpage.setFitToSection(true);
-                // 스타일 초기화
-                $('.section').css({
-                    'height': '',
-                    'min-height': '',
-                    'overflow-y': ''
-                });
-                isNormalScrollSection = false;
-            }
-        }
-    }
-
+    // 풀페이지 스크롤 세팅 (휠 가로채기 없이 자연스러운 네이티브 브라우저 스크롤 지원)
     $('#fullpage').fullpage({
         navigation: false,
-        scrollingSpeed: 1000,
-        autoScrolling: true,
-        fitToSection: true,
-        scrollBar: false,
-        scrollOverflow: true,
-        responsiveHeight: 600,
-        normalScrollElements: '.schedule_list_wrap, #ebook_form',
+        autoScrolling: false,
+        fitToSection: false,
+        scrollBar: true,
+        scrollOverflow: false,
+        scrollingSpeed: 700,
+        css3: true
+    });
 
-
-        afterLoad: function (anchorLink, index) {
-            idx = index - 1; // 2.9.x에서는 1부터 시작
-            $('.section').eq(idx).find('.ani').each(function (i) {
-                var $el = $(this);
-                setTimeout(function () {
-                    $el.addClass('show');
-                }, i * 200);
+    // IntersectionObserver를 활용한 .ani 요소 스크롤 감지 애니메이션 (PC & 모바일 60fps)
+    if ('IntersectionObserver' in window) {
+        var aniObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    $(entry.target).addClass('show');
+                }
             });
-
-            // 스크롤 모드 체크
-            handleScrollMode();
-        },
-        onLeave: function (index, nextIndex, direction) {
-            $('.section').eq(index - 1).find('.ani').removeClass('show');
-        }
-    });
-
-    // 윈도우 리사이즈 이벤트
-    $(window).resize(function () {
-        handleScrollMode();
-    });
-
-    // 초기 로드시 체크
-    handleScrollMode();
+        }, { threshold: 0.1 });
+        $('.ani').each(function () {
+            aniObserver.observe(this);
+        });
+    } else {
+        $('.ani').addClass('show');
+    }
 
     // 히어로 / 전자책 입력폼 / CONTACT 구간에서는 우측 플로팅 버튼 숨김 (입력 방해 방지)
     var $floatingWrap = $('.mobile_floating_wrap');
@@ -98,10 +52,9 @@ $(function () {
     $('.btn_ebook').on('click', function (event) {
         if ($(this).attr('href') === '#section_ebook') {
             event.preventDefault();
-            if (isNormalScrollSection) {
-                document.getElementById('section_ebook').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                $.fn.fullpage.moveTo('section_ebook');
+            var target = document.getElementById('section_ebook');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
             }
         }
     });
