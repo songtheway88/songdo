@@ -1,0 +1,8 @@
+교육자료
+node_modules
+dist
+.playwright-mcp
+.env*
+.openai
+.claude
+*.pdf
