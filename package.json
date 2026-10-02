@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node scripts/build-board.mjs && vite build",
+    "preview": "vite preview",
+    "board": "node scripts/build-board.mjs"
   },
   "devDependencies": {
     "vite": "^8.1.5",

@@ -9,3 +9,7 @@ node_modules/.vite/
 .env.*
 .vercel
 .env*
+
+# 내부 자료 / 로컬 도구 산출물 (배포 제외)
+교육자료/
+.playwright-mcp/

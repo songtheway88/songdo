@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /bds_admin/
+
+Sitemap: https://www.xn--220b21dzyav3g4uc2wgs8j8wak70jbsf.shop/sitemap.xml

@@ -377,3 +377,29 @@ table.event_result_table tbody tr td {
 #vr_ifr {
     margin: 40px 0;
 }
+
+/* 푸터 게시판·상담 링크 */
+.footer_links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 10px;
+    margin-top: 14px;
+    font-size: 15px;
+}
+
+.footer_links a {
+    color: #0d695b;
+    font-weight: 600;
+}
+
+.footer_links span {
+    color: #bbb;
+}
+
+@media (max-width: 1280px) {
+    .footer_links {
+        font-size: 13px;
+        padding: 0 16px;
+    }
+}

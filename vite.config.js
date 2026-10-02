@@ -16,6 +16,16 @@ const getHtmlEntries = () => {
       pages[name] = resolve(__dirname, file);
     }
   });
+  // 분양소식 게시판 (scripts/build-board.mjs 가 생성)
+  const boardDir = resolve(__dirname, 'board');
+  if (fs.existsSync(resolve(boardDir, 'index.html'))) {
+    pages['board'] = resolve(boardDir, 'index.html');
+    fs.readdirSync(boardDir, { withFileTypes: true })
+      .filter((d) => d.isDirectory() && fs.existsSync(resolve(boardDir, d.name, 'index.html')))
+      .forEach((d) => {
+        pages[`board/${d.name}`] = resolve(boardDir, d.name, 'index.html');
+      });
+  }
   return pages;
 };
 
