@@ -1975,3 +1975,20 @@ header {
     display: inline !important;
   }
 }
+
+/* 네이버 톡톡 배너 (더 알아보기 ↔ CONTACT 사이) */
+.talk_banner_wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.talk_banner_wrap .talk_banner_div {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .talk_banner_wrap {
+    margin-top: 24px;
+  }
+}
