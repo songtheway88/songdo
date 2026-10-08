@@ -1,0 +1,256 @@
+/* 메인 리드 입력 섹션 (상단 관심고객등록 / 하단 방문예약) */
+.lead_section {
+  background: #f3f8f6;
+}
+
+/* fullPage.js 가 넣는 인라인 100vh 높이를 무시하고 내용 높이로 */
+.lead_section,
+.lead_section .fp-tableCell {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.lead_section .fp-tableCell {
+  display: block;
+}
+
+.lead_wrap {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.lead_badge {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(13, 105, 91, 0.1);
+  color: #0d695b;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.lead_title {
+  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111;
+}
+
+.lead_desc {
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.lead_desc strong {
+  color: #0d695b;
+}
+
+.lead_desc a {
+  display: inline;
+  color: #0d695b;
+  font-weight: 700;
+}
+
+.lead_form {
+  text-align: left;
+}
+
+.lead_input {
+  width: 100%;
+  height: 52px;
+  padding: 0 14px;
+  border: 1px solid #d5dcda;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 16px;
+  color: #111;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+select.lead_input {
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 14px center;
+  padding-right: 36px;
+}
+
+.lead_input:focus {
+  border-color: #0d695b;
+  outline: none;
+}
+
+.lead_submit {
+  height: 52px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 8px;
+  background: #0d695b;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lead_submit:hover {
+  background: #0a5146;
+}
+
+.lead_submit:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+/* 상단 간편 폼 */
+.lead_quick_fields {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr auto;
+  gap: 10px;
+}
+
+.lead_agree {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #444;
+}
+
+.lead_agree label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.lead_agree input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0d695b;
+}
+
+.lead_privacy_toggle {
+  border: 0;
+  background: none;
+  color: #0d695b;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lead_privacy_box {
+  display: none;
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid #dde3e1;
+  background: #fff;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.lead_privacy_box.is-open {
+  display: block;
+}
+
+/* 하단 방문예약 폼 */
+.lead_section_reserve {
+  background: #fff;
+  border-top: 1px solid #eee;
+}
+
+.lead_form_full {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: #f7faf9;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, .05);
+}
+
+.lead_group {
+  margin-bottom: 20px;
+}
+
+.lead_group > label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+
+.lead_funnel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.lead_funnel label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.lead_funnel input {
+  accent-color: #0d695b;
+}
+
+.lead_funnel_etc {
+  display: none;
+  margin-top: 10px;
+}
+
+.lead_funnel_etc.is-open {
+  display: block;
+}
+
+.lead_form_full .lead_privacy_box {
+  height: 110px;
+  margin-top: 0;
+  overflow-y: auto;
+}
+
+.lead_form_full .lead_submit {
+  width: 100%;
+  height: 56px;
+  font-size: 17px;
+}
+
+@media (max-width: 768px) {
+  .lead_wrap {
+    padding: 56px 16px;
+  }
+
+  .lead_title {
+    font-size: 26px;
+  }
+
+  .lead_desc {
+    font-size: 15px;
+    margin-bottom: 22px;
+  }
+
+  .lead_quick_fields {
+    grid-template-columns: 1fr;
+  }
+
+  .lead_form_full {
+    padding: 22px 16px;
+  }
+
+  .lead_section_reserve .lead_wrap {
+    padding-bottom: 40px;
+  }
+}

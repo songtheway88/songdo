@@ -132,7 +132,7 @@
     }
   ]
 }</script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BqPUZH_g.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-CcOKaZxN.css">
 </head>
 <body class="has-hero-floating">
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3178709688982142&ev=PageView&noscript=1"/></noscript>
@@ -259,6 +259,41 @@
 <a class="hero_faq_btn hero_faq_btn_call" href="tel:1688-5535">📞 전화하기</a>
 <a class="hero_faq_btn hero_faq_btn_reserve" href="/customer">📝 방문예약</a>
 </div>
+</div>
+</section>
+<!-- 🔹 Section Lead (관심고객 등록) -->
+<section class="section fp-auto-height lead_section" data-anchor="section_lead" id="section_lead">
+<div class="lead_wrap">
+<p class="lead_badge">INTEREST REGISTRATION</p>
+<h2 class="lead_title">관심고객 등록</h2>
+<p class="lead_desc">분양 일정과 방문 혜택 소식을 가장 먼저 안내해 드립니다.</p>
+<form class="lead_form lead_form_quick" id="lead_quick_form" data-lead-label="메인 상단 관심고객등록" novalidate>
+<div class="lead_quick_fields">
+<input autocomplete="name" class="lead_input" name="name" placeholder="이름" required type="text"/>
+<input autocomplete="tel" class="lead_input" inputmode="tel" name="phone" placeholder="연락처 (010-0000-0000)" required type="tel"/>
+<select class="lead_input" name="type" required>
+<option value="">관심 타입 선택</option>
+<option value="84A">84A 타입</option>
+<option value="84B">84B 타입</option>
+<option value="84C">84C 타입</option>
+<option value="84D">84D 타입</option>
+<option value="84PA">84PA 타입</option>
+<option value="84PB">84PB 타입</option>
+</select>
+<button class="lead_submit" type="submit">관심고객 등록하기</button>
+</div>
+<div class="lead_agree">
+<label><input name="agree" required type="checkbox"/> (필수) 개인정보 수집 및 이용에 동의합니다</label>
+<button class="lead_privacy_toggle" type="button">보기</button>
+</div>
+<div class="lead_privacy_box">
+                송도 한내들 센트럴리버 관심고객등록을 위해 아래와 같이 개인정보를 수집 및 이용합니다.<br/>
+                1. 수집항목: 이름, 연락처, 관심타입<br/>
+                2. 수집목적: 분양 정보 안내, 고객상담 진행<br/>
+                3. 보유기간: 분양 완료 및 상담 목적 달성 시 즉시 파기<br/>
+                ※ 동의를 거부하실 수 있으나, 거부 시 관심고객등록이 불가합니다.
+            </div>
+</form>
 </div>
 </section>
 <!-- 🔹 Section Video -->
@@ -584,6 +619,67 @@
 </div>
 </div>
 </section>
+<!-- 🔹 Section Reserve (방문예약 - customer 페이지와 동일 입력항목) -->
+<section class="section fp-auto-height lead_section lead_section_reserve" data-anchor="section_reserve" id="section_reserve">
+<div class="lead_wrap">
+<p class="lead_badge">VISIT RESERVATION</p>
+<h2 class="lead_title">방문예약</h2>
+<p class="lead_desc">지금 방문 예약 시 <strong>백화점 상품권 3만원 증정</strong> · 상담전화 <a href="tel:1688-5535">1688-5535</a></p>
+<form class="lead_form lead_form_full" id="lead_reserve_form" data-lead-label="메인 하단 방문예약" novalidate>
+<div class="lead_group">
+<label for="rsv_name">이름 *</label>
+<input autocomplete="name" class="lead_input" id="rsv_name" name="name" placeholder="이름을 입력해 주세요" required type="text"/>
+</div>
+<div class="lead_group">
+<label for="rsv_phone">연락처 *</label>
+<input autocomplete="tel" class="lead_input" id="rsv_phone" inputmode="tel" name="phone" placeholder="예: 010-1234-5678" required type="tel"/>
+</div>
+<div class="lead_group">
+<label for="rsv_email">이메일 (선택)</label>
+<input autocomplete="email" class="lead_input" id="rsv_email" name="email" placeholder="이메일 주소를 입력해 주세요" type="email"/>
+</div>
+<div class="lead_group">
+<label for="rsv_type">관심 평형/타입 *</label>
+<select class="lead_input" id="rsv_type" name="type" required>
+<option value="">선택해 주세요</option>
+<option value="84A">84A 타입</option>
+<option value="84B">84B 타입</option>
+<option value="84C">84C 타입</option>
+<option value="84D">84D 타입</option>
+<option value="84PA">84PA 타입</option>
+<option value="84PB">84PB 타입</option>
+</select>
+</div>
+<div class="lead_group">
+<label>유입경로 *</label>
+<div class="lead_funnel">
+<label><input name="funnel" required type="radio" value="네이버검색"/> 네이버검색</label>
+<label><input name="funnel" type="radio" value="네이버블로그"/> 네이버블로그</label>
+<label><input name="funnel" type="radio" value="인스타그램"/> 인스타그램</label>
+<label><input name="funnel" type="radio" value="유튜브"/> 유튜브</label>
+<label><input name="funnel" type="radio" value="페이스북"/> 페이스북</label>
+<label><input name="funnel" type="radio" value="구글검색"/> 구글검색</label>
+<label><input name="funnel" type="radio" value="기타"/> 기타 (직접입력)</label>
+</div>
+<input class="lead_input lead_funnel_etc" name="funnel_etc" placeholder="유입경로를 직접 입력해 주세요 (예: 다음검색)" type="text"/>
+</div>
+<div class="lead_group">
+<label>개인정보 수집 및 이용동의 *</label>
+<div class="lead_privacy_box is-open">
+                송도 한내들 센트럴리버 방문예약을 위해 아래와 같이 개인정보를 수집 및 이용합니다.<br/>
+                1. 수집항목: 이름, 연락처, 이메일, 관심타입<br/>
+                2. 수집목적: 분양 정보 안내, 고객상담 진행<br/>
+                3. 보유기간: 분양 완료 및 상담 목적 달성 시 즉시 파기<br/>
+                ※ 동의를 거부하실 수 있으나, 거부 시 방문예약이 불가합니다.
+            </div>
+<div class="lead_agree">
+<label><input name="agree" required type="checkbox"/> 개인정보 수집 및 이용에 동의합니다. (필수)</label>
+</div>
+</div>
+<button class="lead_submit" type="submit">방문예약 신청하기</button>
+</form>
+</div>
+</section>
 <!-- 🔹 Footer -->
 <footer class="section fp-auto-height" id="section4">
 <div class="footer_logo">
@@ -664,5 +760,6 @@
 <a class="bottom_bar_item" href="tel:1688-5535">전화상담</a>
 </div>
 <script src="js/visit-popup.js?v=1" charset="utf-8" defer></script>
+<script src="js/lead-form.js?v=1" charset="utf-8" defer></script>
 </body>
 </html>

@@ -30,7 +30,7 @@ $(function () {
 
     // 히어로 / 전자책 입력폼 / CONTACT 구간에서는 우측 플로팅 버튼 숨김 (입력 방해 방지)
     var $floatingWrap = $('.mobile_floating_wrap');
-    var floatingHideZoneIds = ['section0', 'section_ebook', 'section3'];
+    var floatingHideZoneIds = ['section0', 'section_lead', 'section_ebook', 'section3', 'section_reserve'];
     var floatingHideZoneEls = floatingHideZoneIds
         .map(function (id) { return document.getElementById(id); })
         .filter(Boolean);
